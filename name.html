@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 500px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "XB1A06", "label": "XB1A06", "shape": "dot", "size": 10}, {"id": "EMGP05", "label": "EMGP05", "shape": "dot", "size": 10}, {"id": "XB1A02", "label": "XB1A02", "shape": "dot", "size": 10}, {"id": "NCN2P04", "label": "NCN2P04", "shape": "dot", "size": 10}, {"id": "NCONP04", "label": "NCONP04", "shape": "dot", "size": 10}, {"id": "XB1A03", "label": "XB1A03", "shape": "dot", "size": 10}, {"id": "XB1B03", "label": "XB1B03", "shape": "dot", "size": 10}, {"id": "XB1A05", "label": "XB1A05", "shape": "dot", "size": 10}, {"id": "XB1B05", "label": "XB1B05", "shape": "dot", "size": 10}, {"id": "XC3A01", "label": "XC3A01", "shape": "dot", "size": 10}, {"id": "XE7A01", "label": "XE7A01", "shape": "dot", "size": 10}, {"id": "XD1A01", "label": "XD1A01", "shape": "dot", "size": 10}, {"id": "XD1B01", "label": "XD1B01", "shape": "dot", "size": 10}, {"id": "XD1A06", "label": "XD1A06", "shape": "dot", "size": 10}, {"id": "XD3A04", "label": "XD3A04", "shape": "dot", "size": 10}, {"id": "XD4A04", "label": "XD4A04", "shape": "dot", "size": 10}, {"id": "XD5A04", "label": "XD5A04", "shape": "dot", "size": 10}, {"id": "XD6A04", "label": "XD6A04", "shape": "dot", "size": 10}, {"id": "XD2B1", "label": "XD2B1", "shape": "dot", "size": 10}, {"id": "XA1B10", "label": "XA1B10", "shape": "dot", "size": 10}, {"id": "XC2A07", "label": "XC2A07", "shape": "dot", "size": 10}, {"id": "XA2A04", "label": "XA2A04", "shape": "dot", "size": 10}, {"id": "MS154P04", "label": "MS154P04", "shape": "dot", "size": 10}, {"id": "XC1A03", "label": "XC1A03", "shape": "dot", "size": 10}, {"id": "XE1A03", "label": "XE1A03", "shape": "dot", "size": 10}, {"id": "XE2A03", "label": "XE2A03", "shape": "dot", "size": 10}, {"id": "XE3A03", "label": "XE3A03", "shape": "dot", "size": 10}, {"id": "XE4A03", "label": "XE4A03", "shape": "dot", "size": 10}, {"id": "XE5A03", "label": "XE5A03", "shape": "dot", "size": 10}, {"id": "XE6A03", "label": "XE6A03", "shape": "dot", "size": 10}, {"id": "XC2B06", "label": "XC2B06", "shape": "dot", "size": 10}, {"id": "XF1A05", "label": "XF1A05", "shape": "dot", "size": 10}, {"id": "XF1B05", "label": "XF1B05", "shape": "dot", "size": 10}, {"id": "XF1A06", "label": "XF1A06", "shape": "dot", "size": 10}, {"id": "XF1B06", "label": "XF1B06", "shape": "dot", "size": 10}, {"id": "XF1A07", "label": "XF1A07", "shape": "dot", "size": 10}, {"id": "XF1B07", "label": "XF1B07", "shape": "dot", "size": 10}, {"id": "SL09P04", "label": "SL09P04", "shape": "dot", "size": 10}, {"id": "SL18P04", "label": "SL18P04", "shape": "dot", "size": 10}, {"id": "SL2300P04", "label": "SL2300P04", "shape": "dot", "size": 10}, {"id": "SL304P04", "label": "SL304P04", "shape": "dot", "size": 10}, {"id": "SL303P04", "label": "SL303P04", "shape": "dot", "size": 10}, {"id": "XC5A04", "label": "XC5A04", "shape": "dot", "size": 10}, {"id": "XC6A04", "label": "XC6A04", "shape": "dot", "size": 10}, {"id": "XC2B01", "label": "XC2B01", "shape": "dot", "size": 10}, {"id": "XF1B09", "label": "XF1B09", "shape": "dot", "size": 10}, {"id": "XF1B12", "label": "XF1B12", "shape": "dot", "size": 10}, {"id": "XF1B13", "label": "XF1B13", "shape": "dot", "size": 10}, {"id": "XF1B04", "label": "XF1B04", "shape": "dot", "size": 10}, {"id": "XF1A04", "label": "XF1A04", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"Entry3": "EMGP06", "from": "XB1A06", "label": 1, "to": "EMGP05", "weight": 1}, {"Entry3": NaN, "from": "XB1A02", "label": 1, "to": "NCN2P04", "weight": 1}, {"Entry3": NaN, "from": "XB1A02", "label": 1, "to": "NCONP04", "weight": 1}, {"Entry3": NaN, "from": "XB1A02", "label": 1, "to": "XB1A03", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XB1A05", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XB1B05", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XC3A01", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XE7A01", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XD1A01", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XD1B01", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XD1A06", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XD3A04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XD4A04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XD5A04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XD6A04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XD2B1", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XA1B10", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XC2A07", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XA2A04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "MS154P04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XC1A03", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XE1A03", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XE2A03", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XE3A03", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XE4A03", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XE5A03", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XE6A03", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XC2B06", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XF1A05", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XF1B05", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XF1A06", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XF1B06", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XF1A07", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XF1B07", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "SL09P04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "SL18P04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "SL2300P04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "SL304P04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "SL303P04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XC5A04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XC6A04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XC2B01", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XF1B09", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XF1B12", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XF1B13", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XF1B04", "weight": 1}, {"Entry3": NaN, "from": "XB1B03", "label": 1, "to": "XF1A04", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
